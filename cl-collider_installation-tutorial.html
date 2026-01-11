@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>cl-collider Installation Tutorial</title>
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">cl-collider Installation Tutorial</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgcd6c8d9">1. 本文目标</a></li>
+<li><a href="#org8a7d16d">2. 将会使用到的程序</a></li>
+<li><a href="#orgbea5cdc">3. 具体的操作指南</a>
+<ul>
+<li><a href="#orgc045712">3.1. 安装MSYS2</a></li>
+<li><a href="#orgf77f3b1">3.2. 通过MSYS2安装部分后续程序</a></li>
+<li><a href="#org434e1bb">3.3. 编译ocicl</a></li>
+<li><a href="#org3074607">3.4. 使用ocicl 安装 cl-collider</a></li>
+<li><a href="#org6223bec">3.5. 使用 sbcl REPL运行cl-collider</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgcd6c8d9" class="outline-2">
+<h2 id="orgcd6c8d9"><span class="section-number-2">1.</span> 本文目标</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+配置SuperCollider 的操作层Common Lisp语言环境。<br />
+具体表现为在sbcl REPL内可以使用cl-collider控制SuperCollider发声。<br />
+</p>
+</div>
+</div>
+<div id="outline-container-org8a7d16d" class="outline-2">
+<h2 id="org8a7d16d"><span class="section-number-2">2.</span> 将会使用到的程序</h2>
+<div class="outline-text-2" id="text-2">
+<ul class="org-ul">
+<li>MSYS2<br />
+<ul class="org-ul">
+<li>SuperCollider = [scsynth, sclang, scide, supernova]<br /></li>
+<li>Jack2<br /></li>
+<li>sbcl<br /></li>
+<li>git<br /></li>
+</ul></li>
+<li>ocicl<br />
+<ul class="org-ul">
+<li>cl-collider<br /></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgbea5cdc" class="outline-2">
+<h2 id="orgbea5cdc"><span class="section-number-2">3.</span> 具体的操作指南</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-orgc045712" class="outline-3">
+<h3 id="orgc045712"><span class="section-number-3">3.1.</span> 安装MSYS2</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+a. 访问 <a href="https://www.msys2.org/">https://www.msys2.org/</a><br />
+b. 根据页面指引，安装 <code>x86_64</code> 也就是64位的msys2 installer。<br />
+c. 安装好后，配置Windows环境变量，方法参见<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>。<br />
+   需要注意的是，在配置好Windows环境变量后，运行PowerShell的终端中也是能够运 <code>pacman</code> 命令的。<br />
+d. 还是先在UCRT64 shell下更新pacman包仓库和本体。<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">pacman -Syu
+</pre>
+</div>
+<p>
+e. 按提示所说重启UCRT64终端。<br />
+</p>
+</div>
+</div>
+<div id="outline-container-orgf77f3b1" class="outline-3">
+<h3 id="orgf77f3b1"><span class="section-number-3">3.2.</span> 通过MSYS2安装部分后续程序</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+a. 通过pacman命令安装程序。<br />
+   推荐用其他终端，MSYS2的终端难以进行复制和粘贴操作。<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">pacman -Su <span style="background-color: #fff0f0;">\</span>
+       mingw-w64-ucrt-x86_64-jack2 <span style="background-color: #fff0f0;">\</span>
+       mingw-w64-ucrt-x86_64-sbcl <span style="background-color: #fff0f0;">\</span>
+       mingw-w64-ucrt-x86_64-supercollider <span style="background-color: #fff0f0;">\</span>
+       git
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org434e1bb" class="outline-3">
+<h3 id="org434e1bb"><span class="section-number-3">3.3.</span> 编译ocicl</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+更多请参见这个 <a href="https://github.com/ocicl/ocicl">github repo: ocicl</a> 和它README里的 <a href="https://github.com/ocicl/ocicl?tab=readme-ov-file#installation">installation guide</a>.<br />
+a. 从源代码编译ocicl，这是一个common lisp包管理程序。<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #007020;">cd</span> ~
+git clone https://github.com/ocicl/ocicl.git
+<span style="color: #007020;">cd</span> ocicl
+sbcl --load setup.lisp
+</pre>
+</div>
+<p>
+b. ocicl.exe 将会出现在 <code>%UserProfile%\AppData\Local\ocicl\</code> 目录下。<br />
+   一个典型的目录是 <code>C:\Users\Your-User-Name\AppData\Local\ocicl\bin</code> ，<br />
+   <b>需要</b> 将该含有 <code>ocicl.exe</code> 的文件夹路径添加到Windows系统环境变量里，方法参见脚注<sup><a id="fnr.1.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>。<br />
+c. 在PowerShell终端下运行 <code>ocicl version</code> 后正常打印该程序的信息后，你就删除该源代码文件夹了。<br />
+</p>
+</div>
+</div>
+<div id="outline-container-org3074607" class="outline-3">
+<h3 id="org3074607"><span class="section-number-3">3.4.</span> 使用ocicl 安装 cl-collider</h3>
+<div class="outline-text-3" id="text-3-4">
+<p>
+a. 切换到PowerShell终端下，执行：<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-PowerShell">ocicl setup
+</pre>
+</div>
+<p>
+b. 将该命令打印出的内容粘贴到 <code>~/.sbclrc</code> 中。<br />
+c. 正式开始安装cl-collider。执行：<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-PowerShell">ocicl --global install cl-collider
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org6223bec" class="outline-3">
+<h3 id="org6223bec"><span class="section-number-3">3.5.</span> 使用 sbcl REPL运行cl-collider</h3>
+<div class="outline-text-3" id="text-3-5">
+<p>
+a. 终端中输入以下命令：<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">sbcl
+</pre>
+</div>
+<p>
+b. 进入REPL，再依次执行如下common lisp语句，以启动scsynth服务器。<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-lisp">(asdf:load-system <span style="color: #007020;">:cl-collider</span>)
+(<span style="color: #008800;">in-package</span> <span style="color: #007020;">:sc-user</span>)
+(setf *sc-synth-program* <span style="background-color: #fff0f0;">"C:/msys64/ucrt64/bin/scsynth.exe"</span>)
+(setf *sc-plugin-paths* (list <span style="background-color: #fff0f0;">"C:/msys64/ucrt64/lib/SuperCollider/plugins/"</span>))
+(setf *s* (make-external-server <span style="background-color: #fff0f0;">"localhost"</span> <span style="color: #007020;">:port</span> 4444))
+(server-boot *s*)
+</pre>
+</div>
+<p>
+c. 一个简单的发声测试语句。<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-lisp">(proxy <span style="color: #007020;">:test-sound</span> (sin-osc.ar 440 0 0.2))
+<span style="color: #888888;">;;</span><span style="color: #888888;">stop playing
+</span>(proxy <span style="color: #007020;">:test-sound</span> nil)
+<span style="color: #888888;">;;</span><span style="color: #888888;">exit sbcl
+</span>(<span style="color: #008800;">in-package</span> <span style="color: #007020;">:cl-user</span>)
+(exit)
+</pre>
+</div>
+<p>
+d. 将以上 <code>b.</code> 部分的信息写入 <code>~/.sbclrc</code> 尾部，即可实现对cl-collider进行配置。<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-lisp"><span style="color: #888888;">;; </span><span style="color: #888888;">In your ~/.sbclrc
+</span>(<span style="color: #008800;">defun</span> <span style="color: #0066BB;">my/cl-collider-boot</span> ()
+  <span style="color: #888888;">;;</span><span style="color: #888888;">codes in "b."
+</span>  )
+<span style="color: #888888;">;; </span><span style="color: #888888;">In REPL run this to quickly boot that.
+</span>(my/cl-collider-boot)
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+如何配置Windows环境变量。<br />
+</p>
+<ol class="org-ol">
+<li>按下Windows徽章键，搜索“系统环境变量”。<br /></li>
+<li>弹出的卡片菜单里“高级”分页内，最下面“确认“按钮上方，点击该“编辑环境变量”按钮。<br /></li>
+<li>我们需要编辑列表中”PATH“的值，选中列表的”PATH“，双击或点击”编辑按钮“打开完整列表。<br />
+添加:<br /></li>
+</ol>
+<div class="org-src-container">
+<pre class="src src-plain-text">C:\msys64\ucrt64\bin
+C:\msys64\mingw64\bin
+C:\Users\JohnDoe\AppData\Local\ocicl\bin
+         ~~~~~~~
+         ^Repalce this to your user name. 
+</pre>
+</div></div></div>
+
+
+</div>
+</div></div>
+</body>
+</html>
