@@ -1,5 +1,4 @@
 #+TITLE: cl-collider Installation Tutorial
-#+OPTIONS: \n:t
 
 * 本文目标
 配置SuperCollider 的操作层Common Lisp语言环境。
